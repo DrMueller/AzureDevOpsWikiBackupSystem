@@ -1,0 +1,28 @@
+name: 1.0$(rev:.r) # build numbering format
+
+variables:
+  BuildConfiguration: 'Release'
+  FolderToPublish: 'AzureFunctions'
+
+resources:
+  repositories:
+  - repository: ALMStuff
+    type: github
+    name: DrMueller/ALMStuff
+    ref: refs/heads/master
+    endpoint: GitHub-DrMueller
+
+jobs:
+- job: 'BuildAndPublishAsArtifact'
+  displayName: 'Build and save zipped Artifact'
+  pool:
+    name: 'Hosted VS2017'
+  steps:
+  - template: AzureDevOps/Templates/StepTemplates/NetCore/Initialize_And_Test.yaml@ALMStuff
+    parameters:
+      buildConfiguration: $(BuildConfiguration)
+  - template: AzureDevOps/Templates/StepTemplates/NetCore/WebPublish.yaml@ALMStuff
+    parameters:
+      BuildConfiguration: $(BuildConfiguration)
+      FolderToPublish: $(FolderToPublish)
+  - template: AzureDevOps/Templates/StepTemplates/NetCore/Zip_And_Save_Artifact.yaml@ALMStuff
