@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.AzureDevOpsWikiBackupSystem", "Sources\Application\Mmu.AzureDevOpsWikiBackupSystem.csproj", "{D1A2FA8E-95BF-4F7A-841D-26B9D21410B2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.Mlazh.AzureApplicationExtensions", "..\MLAZH\MLAZH.AzureApplicationExtensions\Sources\Application\Mmu.Mlazh.AzureApplicationExtensions.csproj", "{0FE934C8-BC11-4B78-AB23-D040B4B7037A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{D1A2FA8E-95BF-4F7A-841D-26B9D21410B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1A2FA8E-95BF-4F7A-841D-26B9D21410B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1A2FA8E-95BF-4F7A-841D-26B9D21410B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0FE934C8-BC11-4B78-AB23-D040B4B7037A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FE934C8-BC11-4B78-AB23-D040B4B7037A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FE934C8-BC11-4B78-AB23-D040B4B7037A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FE934C8-BC11-4B78-AB23-D040B4B7037A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

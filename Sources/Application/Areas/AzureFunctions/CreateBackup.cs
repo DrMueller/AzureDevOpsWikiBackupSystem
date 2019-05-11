@@ -12,9 +12,8 @@ namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.AzureFunctions
 {
     public static class Createbackup
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Needed by the Framework")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "IDE0060", Justification = "Needed by the Framework")]
         [FunctionName("CreateBackup")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Needed by the Framework")]
         public static async Task RunAsync([TimerTrigger("0 0 0 * * *")]TimerInfo myTimer, ILogger logger, ExecutionContext context)
         {
             var azureFuncContext = AppInitializationService.Initialize(context, logger);
@@ -32,6 +31,7 @@ namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.AzureFunctions
         }
 
         [FunctionName("Test")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Needed by the Framework")]
         public static async Task<IActionResult> ExecuteAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger logger, ExecutionContext context)
         {
             var azureFuncContext = AppInitializationService.Initialize(context, logger);
