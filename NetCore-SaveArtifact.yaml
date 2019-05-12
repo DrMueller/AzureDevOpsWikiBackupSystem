@@ -2,7 +2,7 @@ name: 1.0$(rev:.r) # build numbering format
 
 variables:
   BuildConfiguration: 'Release'
-  FolderToPublish: 'AzureFunctions'
+  FolderToPublish: 'Application'
 
 resources:
   repositories:
