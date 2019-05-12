@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.IO.Abstractions;
-using Mmu.Mlh.LanguageExtensions.Areas.Collections;
 
 namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services.Servants.Implementation
 {
@@ -25,22 +24,21 @@ namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services.Servan
             return newDirectory.FullName;
         }
 
-        private static void RemoveReadOnlyAndDelete(FileInfoBase fileInfo)
-        {
-            if ((fileInfo.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
-            {
-                fileInfo.Attributes &= ~FileAttributes.ReadOnly;
-            }
-
-            fileInfo.Delete();
-        }
-
         private void DeleteDirectories(string directory)
         {
-            var dirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(directory);
-            dirInfo.GetFiles("*.pack", SearchOption.AllDirectories).ForEach(f => RemoveReadOnlyAndDelete(f));
-            dirInfo.GetFiles("*.idx", SearchOption.AllDirectories).ForEach(f => RemoveReadOnlyAndDelete(f));
-            _fileSystem.Directory.Delete(directory, true);
+            foreach (var subdirectory in _fileSystem.Directory.EnumerateDirectories(directory))
+            {
+                DeleteDirectories(subdirectory);
+            }
+
+            foreach (var fileName in _fileSystem.Directory.EnumerateFiles(directory))
+            {
+                var fileInfo = _fileSystem.FileInfo.FromFileName(fileName);
+                fileInfo.Attributes = FileAttributes.Normal;
+                fileInfo.Delete();
+            }
+
+            _fileSystem.Directory.Delete(directory);
         }
     }
 }
