@@ -2,6 +2,6 @@
 {
     public interface IRepoPathServant
     {
-        string InitializeDownloadPath(string baseDirectory);
+        void CleanUp(string repoDirectory);
     }
 }

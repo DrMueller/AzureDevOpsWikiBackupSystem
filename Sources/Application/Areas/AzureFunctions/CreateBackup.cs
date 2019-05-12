@@ -16,7 +16,6 @@ namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.AzureFunctions
         [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Needed by the Framework")]
         public static async Task RunAsync([TimerTrigger("0 0 0 * * MON")]TimerInfo myTimer, ILogger logger, ExecutionContext context)
         {
-            var azureFuncContext = AppInitializationService.Initialize(context, logger);
             await RunInternalAsync(context, logger);
         }
 

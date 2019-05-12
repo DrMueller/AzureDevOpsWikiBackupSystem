@@ -15,21 +15,13 @@ namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services.Servan
             _loggingService = loggingService;
         }
 
-        public string InitializeDownloadPath(string baseDirectory)
+        public void CleanUp(string repoDirectory)
         {
-            var fullPath = _fileSystem.Path.Combine(baseDirectory, "GitRepo");
-
-            _loggingService.LogInformation($"Initializing {fullPath}..");
-
-            if (_fileSystem.Directory.Exists(fullPath))
+            if (_fileSystem.Directory.Exists(repoDirectory))
             {
                 _loggingService.LogInformation($"Deleting subdirectories..");
-                DeleteDirectories(fullPath);
+                DeleteDirectories(repoDirectory);
             }
-
-            _loggingService.LogInformation($"Creating directory..");
-            var newDirectory = _fileSystem.Directory.CreateDirectory(fullPath);
-            return newDirectory.FullName;
         }
 
         private void DeleteDirectories(string directory)

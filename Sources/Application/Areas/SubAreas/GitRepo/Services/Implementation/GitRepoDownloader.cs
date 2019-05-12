@@ -9,10 +9,10 @@ namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services.Implem
 {
     public class GitRepoDownloader : IGitRepoDownloader
     {
-        private readonly ILoggingService _loggingService;
-        private readonly ISettingsProvider _settingsProvider;
-        private readonly IRepoPathServant _repoPathServant;
         private readonly IFileSystem _fileSystem;
+        private readonly ILoggingService _loggingService;
+        private readonly IRepoPathServant _repoPathServant;
+        private readonly ISettingsProvider _settingsProvider;
 
         public GitRepoDownloader(
             ILoggingService loggingService,
@@ -26,9 +26,17 @@ namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services.Implem
             _fileSystem = fileSystem;
         }
 
+        public void CleanUp(string repoDirectory)
+        {
+            _repoPathServant.CleanUp(repoDirectory);
+        }
+
         public RepoDownloadResult DownloadRepo(string baseDirectory)
         {
-            var repoPath = _repoPathServant.InitializeDownloadPath(baseDirectory);
+            var repoDirectory = _fileSystem.Path.Combine(baseDirectory, "GitRepo");
+            _repoPathServant.CleanUp(repoDirectory);
+            var newDirectory = _fileSystem.Directory.CreateDirectory(repoDirectory);
+
             var settings = _settingsProvider.ProvideSettings();
 
             var options = new CloneOptions
@@ -40,8 +48,8 @@ namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services.Implem
                 }
             };
 
-            _loggingService.LogInformation($"Starting to download Repo to {repoPath}..");
-            var clonedRepo = Repository.Clone(settings.AzureDevOpsRepoPath.AbsoluteUri, repoPath, options);
+            _loggingService.LogInformation($"Starting to download Repo to {repoDirectory}..");
+            var clonedRepo = Repository.Clone(settings.AzureDevOpsRepoPath.AbsoluteUri, repoDirectory, options);
             _loggingService.LogInformation($"Repo downloaded..");
 
             var directoryInfo = _fileSystem.DirectoryInfo.FromDirectoryName(clonedRepo).Parent;
