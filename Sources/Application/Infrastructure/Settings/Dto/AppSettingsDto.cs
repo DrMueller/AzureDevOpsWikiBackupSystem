@@ -5,5 +5,7 @@
         public string AzureDevOpsRepoAccessToken { get; set; }
 
         public string AzureDevOpsRepoPath { get; set; }
+
+        public string StorageConnectionString { get; set; }
     }
 }

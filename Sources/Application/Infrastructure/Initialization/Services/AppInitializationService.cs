@@ -2,10 +2,14 @@
 using Microsoft.Extensions.Logging;
 using Mmu.AzureDevOpsWikiBackupSystem.Areas.Orchestration.Services;
 using Mmu.AzureDevOpsWikiBackupSystem.Areas.Orchestration.Services.Implementation;
+using Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.FilePersisting.Services;
+using Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.FilePersisting.Services.Implementation;
 using Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services;
 using Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services.Implementation;
 using Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services.Servants;
 using Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services.Servants.Implementation;
+using Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.Zipping.Services;
+using Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.Zipping.Services.Implementation;
 using Mmu.AzureDevOpsWikiBackupSystem.Infrastructure.Settings.Services;
 using Mmu.AzureDevOpsWikiBackupSystem.Infrastructure.Settings.Services.Implementation;
 using Mmu.Mlazh.AzureApplicationExtensions.Areas.AzureAppInitialization.Services;
@@ -36,6 +40,9 @@ namespace Mmu.AzureDevOpsWikiBackupSystem.Infrastructure.Initialization.Services
                 cfg.For<IGitRepoDownloader>().Use<GitRepoDownloader>().Singleton();
                 cfg.For<ISettingsProvider>().Use<SettingsProvider>().Singleton();
                 cfg.For<IRepoPathServant>().Use<RepoPathServant>().Singleton();
+                cfg.For<IZippingService>().Use<ZippingService>().Singleton();
+                cfg.For<IFilePersistingService>().Use<FilePersistingService>().Singleton();
+                cfg.For<IPersistedFilesCleanupService>().Use<PersistedFilesCleanupService>().Singleton();
             });
         }
     }

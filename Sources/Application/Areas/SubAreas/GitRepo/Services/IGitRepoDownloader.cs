@@ -1,7 +1,9 @@
-﻿namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services
+﻿using Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Models;
+
+namespace Mmu.AzureDevOpsWikiBackupSystem.Areas.SubAreas.GitRepo.Services
 {
     public interface IGitRepoDownloader
     {
-        void DownloadRepo(string baseDirectory);
+        RepoDownloadResult DownloadRepo(string baseDirectory);
     }
 }

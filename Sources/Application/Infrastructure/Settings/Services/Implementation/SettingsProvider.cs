@@ -20,7 +20,8 @@ namespace Mmu.AzureDevOpsWikiBackupSystem.Infrastructure.Settings.Services.Imple
 
             return new AppSettings(
                 settingsDto.AzureDevOpsRepoAccessToken,
-                new Uri(settingsDto.AzureDevOpsRepoPath));
+                new Uri(settingsDto.AzureDevOpsRepoPath),
+                settingsDto.StorageConnectionString);
         }
     }
 }
